@@ -27,14 +27,17 @@ bool Game::GameApp::GameSpecificInit()
     m_CameraController = std::make_unique<CameraController>();
     m_CameraController->Init(m_EntityManager.get());
 
-    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "blank", "blank.png");
-    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "hello", "hello_world.jpg");
-   
-    m_PlayerController = std::make_unique<PlayerController>();
-    m_PlayerController->Init(m_EntityManager.get(), m_TextureManager->GetTexture("blank"));
+    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "virus", "virus.png");
+    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "background", "background.jpg");
 
     m_Stadium = std::make_unique<Stadium>();
-    m_Stadium->Init(m_EntityManager.get(), m_TextureManager->GetTexture("blank"));
+    m_Stadium->Init(m_EntityManager.get(), m_TextureManager->GetTexture("background"));
+
+   
+    m_PlayerController = std::make_unique<PlayerController>();
+    m_PlayerController->Init(m_EntityManager.get(), m_TextureManager->GetTexture("virus"));
+
+   
 
     return true;
 }

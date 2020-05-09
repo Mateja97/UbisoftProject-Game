@@ -11,9 +11,9 @@ namespace Game
 
         auto player = std::make_unique<Engine::Entity>();
 
-        player->AddComponent<Engine::TransformComponent>(-400.f, 0.f, 30.f, 100.f);
+        player->AddComponent<Engine::TransformComponent>(-400.f, 0.f, 70.f, 70.f);
         //TODO: kolizija kruga
-        player->AddComponent<Engine::CollisionComponent>(30.f, 100.0f);
+        player->AddComponent<Engine::CollisionComponent>(70.f, 70.0f);
         player->AddComponent<Engine::PlayerComponent>(100.f);
         player->AddComponent<Engine::InputComponent>();
         player->AddComponent<Engine::MoverComponent>();
@@ -52,7 +52,7 @@ namespace Game
                 {
                     auto mover = entity->GetComponent<Engine::MoverComponent>();
                     //TODO:Reakcija na sudar
-                    mover->m_TranslationSpeed = { mover->m_TranslationSpeed.x, mover->m_TranslationSpeed.y * -1.f };
+                    mover->m_TranslationSpeed = {0, 0 };
                 }
             }
         }
