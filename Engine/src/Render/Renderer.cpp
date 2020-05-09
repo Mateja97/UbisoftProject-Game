@@ -106,17 +106,20 @@ namespace Engine
 
 #ifdef _DEBUG
             // DebugDraw
-            SDL_SetRenderDrawColor(m_NativeRenderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+            //SDL_SetRenderDrawColor(m_NativeRenderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 
-            SDL_RenderDrawPoint(m_NativeRenderer, (int)screenPosition.x, (int)screenPosition.y);
+           // SDL_RenderDrawPoint(m_NativeRenderer, (int)screenPosition.x, (int)screenPosition.y);
 
+            //!!!!!!!!!!!!!!!!!!!!!!!
+            /* NE TREBA OVO NISTA AL NEKA GA MOZDA POSLUZI
+            //!!!!!!!!!!!!!!!!!!!!!!!
             if (auto collider = r->GetComponent<CollisionComponent>())
             {
-                SDL_SetRenderDrawColor(m_NativeRenderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+               // SDL_SetRenderDrawColor(m_NativeRenderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
                 dst = { (int)(screenPosition.x - collider->m_Size.x / 2), (int)(screenPosition.y - collider->m_Size.y / 2), (int)collider->m_Size.x, (int)collider->m_Size.y };
-                SDL_RenderDrawRect(m_NativeRenderer, &dst);
+               // SDL_RenderDrawRect(m_NativeRenderer, &dst);
 
-            }
+            }*/
             
             SetBackgroundColor(m_BackgroundColor);
 #endif

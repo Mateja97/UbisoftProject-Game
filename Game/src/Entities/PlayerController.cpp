@@ -14,7 +14,7 @@ namespace Game
         player->AddComponent<Engine::TransformComponent>(-400.f, 0.f, 70.f, 70.f);
         //TODO: kolizija kruga
         player->AddComponent<Engine::CollisionComponent>(70.f, 70.0f);
-        player->AddComponent<Engine::PlayerComponent>(100.f);
+        player->AddComponent<Engine::PlayerComponent>(50.f);
         player->AddComponent<Engine::InputComponent>();
         player->AddComponent<Engine::MoverComponent>();
         player->AddComponent<Engine::SpriteComponent>().m_Image = texture_;
@@ -39,11 +39,14 @@ namespace Game
             auto move = entity->GetComponent<Engine::MoverComponent>();
             auto input = entity->GetComponent<Engine::InputComponent>();
             auto speed = entity->GetComponent<Engine::PlayerComponent>()->m_PanSpeed;
-
+            auto pos = entity->GetComponent<Engine::TransformComponent>();
             bool moveUpInput = Engine::InputManager::IsActionActive(input, fmt::format("Player{}MoveUp", 1));
             LOG_INFO("Input: {}", moveUpInput);
-            move->m_TranslationSpeed.y = speed * (moveUpInput ? -150.0f : 1.0f);
-
+            if (moveUpInput) {
+                pos->m_Position.y -= speed;
+            }
+            move->m_TranslationSpeed.y = speed * (moveUpInput ? -1.0f : 1.0f);
+           // std::cout << move->m_TranslationSpeed.y << std::endl;
             auto collider = entity->GetComponent<Engine::CollisionComponent>();
 
             for (const auto& entity1 : collider->m_CollidedWith)
