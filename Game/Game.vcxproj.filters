@@ -33,6 +33,9 @@
     <ClInclude Include="src\Entities\StadiumController.h">
       <Filter>src\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entities\ObstacleController.h">
+      <Filter>src\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\precomp.cpp">
@@ -51,6 +54,9 @@
       <Filter>src\Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Entities\StadiumController.cpp">
+      <Filter>src\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\ObstacleController.cpp">
       <Filter>src\Entities</Filter>
     </ClCompile>
   </ItemGroup>

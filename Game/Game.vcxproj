@@ -160,6 +160,7 @@
     <ClInclude Include="src\Core\GameApp.h" />
     <ClInclude Include="src\Entities\CameraController.h" />
     <ClInclude Include="src\Entities\GameComponents.h" />
+    <ClInclude Include="src\Entities\ObstacleController.h" />
     <ClInclude Include="src\Entities\PlayerController.h" />
     <ClInclude Include="src\Entities\StadiumController.h" />
     <ClInclude Include="src\Entities\StaticImage.h" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="src\Core\GameApp.cpp" />
     <ClCompile Include="src\Entities\CameraController.cpp" />
+    <ClCompile Include="src\Entities\ObstacleController.cpp" />
     <ClCompile Include="src\Entities\PlayerController.cpp" />
     <ClCompile Include="src\Entities\StadiumController.cpp" />
     <ClCompile Include="src\Entities\StaticImage.cpp" />

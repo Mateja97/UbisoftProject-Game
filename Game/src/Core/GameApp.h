@@ -8,6 +8,7 @@ namespace Game
     class PlayerController;
     class Stadium;
     class StaticImage;
+    class ObstacleController;
 
     class GameApp final : public Engine::Application
     {
@@ -21,6 +22,7 @@ namespace Game
         std::unique_ptr<CameraController> m_CameraController{};
         std::unique_ptr<Stadium> m_Stadium{};
         std::unique_ptr<StaticImage> m_TestImage{};
+        std::unique_ptr<ObstacleController> m_ObstacleController{};
     };
 
 }

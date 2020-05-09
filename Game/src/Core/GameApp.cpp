@@ -5,6 +5,7 @@
 #include "Entities/PlayerController.h"
 #include "Entities/StadiumController.h"
 #include "Entities/StaticImage.h"
+#include "Entities/ObstacleController.h"
 
 #include <Engine.h>
 #include <Core/EntryPoint.h>
@@ -37,6 +38,9 @@ bool Game::GameApp::GameSpecificInit()
     m_PlayerController = std::make_unique<PlayerController>();
     m_PlayerController->Init(m_EntityManager.get(), m_TextureManager->GetTexture("virus"));
 
+    m_ObstacleController = std::make_unique<ObstacleController>();
+    m_ObstacleController->Init(m_EntityManager.get(), m_TextureManager->GetTexture("blank"));
+
    
 
     return true;
@@ -46,7 +50,8 @@ void Game::GameApp::GameSpecificUpdate(float dt)
 {
     m_PlayerController->Update(dt, m_EntityManager.get());
     m_CameraController->Update(dt, m_EntityManager.get());
-    
+    m_ObstacleController->Update(dt, m_EntityManager.get());
+
 }
 
 bool Game::GameApp::GameSpecificShutdown()

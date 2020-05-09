@@ -2,17 +2,18 @@
 
 namespace Game
 {
-    struct BallComponent : public Engine::Component
+    struct ObstacleComponent : public Engine::Component
     {
-
+        float m_Speed{};
+        ObstacleComponent(float speed) : m_Speed(speed) {};
     };
 
     struct WallComponent : public Engine::Component
     {
-
+        
     };
 
-    struct GoalComponent : public Engine::Component
+    struct ScoreComponent : public Engine::Component
     {
 
     };

@@ -49,13 +49,19 @@ namespace Game
            // std::cout << move->m_TranslationSpeed.y << std::endl;
             auto collider = entity->GetComponent<Engine::CollisionComponent>();
 
-            for (const auto& entity1 : collider->m_CollidedWith)
+            for (const auto& coliderEntity : collider->m_CollidedWith)
             {
-                if (entity1->HasComponent<WallComponent>())
+                if (coliderEntity->HasComponent<WallComponent>())
                 {
                     auto mover = entity->GetComponent<Engine::MoverComponent>();
                     //TODO:Reakcija na sudar
                     mover->m_TranslationSpeed = {0, 0 };
+                }
+                if (coliderEntity->HasComponent<ObstacleComponent>())
+                {
+                    auto mover = entity->GetComponent<Engine::MoverComponent>();
+                    //TODO:Reakcija na sudar
+                    mover->m_TranslationSpeed = { mover->m_TranslationSpeed.x, mover->m_TranslationSpeed.y * -1.f };
                 }
             }
         }
