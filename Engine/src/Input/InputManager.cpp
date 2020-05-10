@@ -47,7 +47,6 @@ namespace Engine
             case EInputActionState::Released:
             {
                 m_InputActionStates[action] = bIsPressed ? EInputActionState::JustPressed : EInputActionState::None;
-                LOG_INFO("Uslo se ovde");
                 break;
             }
             default:

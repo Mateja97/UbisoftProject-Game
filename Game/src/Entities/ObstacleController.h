@@ -16,7 +16,8 @@ namespace Game
 
 	private:
 		float m_ObstacleWidth = 125.f;
-		float m_ObstacleHeight = 300.f;
+		float m_ObstacleHeight = 550.f;
 		float m_ColiderHeight = 300.f;
+		float m_NumberOfObstacles = 5;
 	};
 }

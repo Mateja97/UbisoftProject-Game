@@ -41,7 +41,7 @@ namespace Game
             auto speed = entity->GetComponent<Engine::PlayerComponent>()->m_PanSpeed;
             auto pos = entity->GetComponent<Engine::TransformComponent>();
             bool moveUpInput = Engine::InputManager::IsActionActive(input, fmt::format("Player{}MoveUp", 1));
-            LOG_INFO("Input: {}", moveUpInput);
+            
             if (moveUpInput) {
                 pos->m_Position.y -= speed;
             }
