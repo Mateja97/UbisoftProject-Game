@@ -1,5 +1,5 @@
 #pragma once
-
+#include <SDL_ttf.h>
 
 struct SDL_Texture;
 

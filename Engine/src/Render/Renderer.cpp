@@ -3,9 +3,11 @@
 #include "Render/Window.h"
 #include "Render/Texture.h"
 #include "ECS/Entity.h"
-
+#include "../Game/src/Entities/PlayerController.h"
 #include <SDL.h>
-
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#include <sstream>
 namespace Engine
 {
 
@@ -34,7 +36,6 @@ namespace Engine
         }
 
         SetBackgroundColor(100, 150, 236, SDL_ALPHA_OPAQUE);
-
         return true;
     }
 
@@ -73,6 +74,7 @@ namespace Engine
         {
             DrawEntity(r, camera);
         }
+        loadMedia();
     }
 
     void Renderer::DrawEntity(const Entity* r, const Entity* camera)
@@ -120,7 +122,7 @@ namespace Engine
                // SDL_RenderDrawRect(m_NativeRenderer, &dst);
 
             }*/
-            
+
             SetBackgroundColor(m_BackgroundColor);
 #endif
         }
@@ -156,4 +158,72 @@ namespace Engine
         Shutdown();
     }
 
+    bool Renderer::loadMedia()
+    {
+        //Loading success flag
+        bool success = true;
+
+        //Open the font
+        if (TTF_Init() == -1)
+        {
+            printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+            success = false;
+        }
+        TTF_Font* gFont = TTF_OpenFont("..\\Data\\font.ttf", 28);
+        if (gFont == NULL)
+        {
+            printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+            success = false;
+        }
+        else
+        {
+            //Render text
+            SDL_Color textColor = { 255, 0, 0 };
+            SDL_Surface* textSurface = TTF_RenderText_Solid(gFont,"SCORE:", textColor);
+            int score = Game::PlayerController::score;
+            std::stringstream strm;
+            strm << score;
+            SDL_Surface* scoreSurface = TTF_RenderText_Solid(gFont, strm.str().c_str(), textColor);
+            if (textSurface == NULL)
+            {
+                printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+            }
+            if (scoreSurface == NULL)
+            {
+                printf("Unable to render scoresurface! SDL_ttf Error: %s\n", TTF_GetError());
+            }
+            else
+            {
+                //Create texture from surface pixels
+                SDL_Texture* scoreT = SDL_CreateTextureFromSurface(m_NativeRenderer, textSurface);
+                SDL_Texture* scoreValue = SDL_CreateTextureFromSurface(m_NativeRenderer, scoreSurface);
+                if (scoreT == NULL)
+                {
+                    printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+                }
+                if (scoreValue == NULL)
+                {
+                    printf("Unable to create texture from rendered scoreValue! SDL Error: %s\n", SDL_GetError());
+                }
+
+                int imgFlags = IMG_INIT_PNG;
+                if (!(IMG_Init(imgFlags) & imgFlags))
+                {
+                    printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+                    success = false;
+                }
+
+                //Initialize SDL_ttf
+                SDL_Rect dst{ 0, 0, 100, 100 };
+                SDL_Rect dst2{ 120,0,20,100 };
+                SDL_RenderCopy(m_NativeRenderer, scoreT, NULL, &dst);
+                SDL_RenderCopy(m_NativeRenderer, scoreValue, NULL, &dst2);
+                SDL_RenderPresent(m_NativeRenderer);
+                SDL_FreeSurface(scoreSurface);
+                SDL_FreeSurface(textSurface);
+            }
+            
+        }
+        return success;
+    }
 }

@@ -25,10 +25,13 @@ namespace Engine
         void SetBackgroundColor(unsigned char bgR_, unsigned char bgG_, unsigned char bgB_, unsigned char bgA_);
         void SetBackgroundColor(const Color& col_);
         ~Renderer();
+        bool loadMedia();
 
     private:
         std::unique_ptr<Window> m_Window;
+        
         SDL_Renderer* m_NativeRenderer{ };
         Color m_BackgroundColor{ };
+        
     };
 }

@@ -4,6 +4,8 @@
 
 namespace Game
 {
+    bool PlayerController::m_running = true;
+    int PlayerController::score = 0;
     bool PlayerController::Init(Engine::EntityManager* entityManager_, Engine::Texture* texture_)
     {
         ASSERT(entityManager_ != nullptr, "Must pass valid pointer to entitymanager to PlayerController::Init()");
@@ -46,7 +48,6 @@ namespace Game
                 pos->m_Position.y -= speed;
             }
             move->m_TranslationSpeed.y = speed * (moveUpInput ? -10.0f : 3.0f);
-           // std::cout << move->m_TranslationSpeed.y << std::endl;
             auto collider = entity->GetComponent<Engine::CollisionComponent>();
 
             for (const auto& coliderEntity : collider->m_CollidedWith)
@@ -54,14 +55,15 @@ namespace Game
                 if (coliderEntity->HasComponent<WallComponent>())
                 {
                     auto mover = entity->GetComponent<Engine::MoverComponent>();
-                    //TODO:Reakcija na sudar
+                    m_running = false;
                     mover->m_TranslationSpeed = {0, 0 };
                 }
                 if (coliderEntity->HasComponent<ObstacleComponent>())
                 {
                     auto mover = entity->GetComponent<Engine::MoverComponent>();
-                    //TODO:Reakcija na sudar
-                    mover->m_TranslationSpeed = { mover->m_TranslationSpeed.x, mover->m_TranslationSpeed.y * -1.f };
+                    m_running = false;
+                    score += 1;
+                    mover->m_TranslationSpeed = { 0,0 };
                 }
             }
         }

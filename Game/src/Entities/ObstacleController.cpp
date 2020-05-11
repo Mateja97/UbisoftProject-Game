@@ -1,5 +1,6 @@
 #include "precomp.h"
 #include "ObstacleController.h"
+#include "PlayerController.h"
 #include "Entities/GameComponents.h"
 #include <random>
 
@@ -68,12 +69,20 @@ namespace Game
 
 		for (auto& obstacle : obstaclesToMove)
 		{
+			
+			
 			auto move = obstacle->GetComponent<Engine::MoverComponent>();
 			auto speed = obstacle->GetComponent<Game::ObstacleComponent>()->m_Speed;
+			if (!Game::PlayerController::m_running) {
 
-			move->m_TranslationSpeed.x = speed * -1.f;
+				move->m_TranslationSpeed.x = 0;
+
+			}else{
+				move->m_TranslationSpeed.x = speed * -1.f;
+			}
 			
 			auto transform = obstacle->GetComponent<Engine::TransformComponent>();
+
 			
 			if (transform->m_Position.x < -800.f)
 			{
