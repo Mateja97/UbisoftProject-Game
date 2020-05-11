@@ -30,7 +30,7 @@ bool Game::GameApp::GameSpecificInit()
 
     m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "virus", "virus.png");
     m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "background", "background.jpg");
-    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "vaccine", "vaccine.png");
+    m_TextureManager->CreateTexture(m_RenderSystem->GetRenderer(), "vaccine", "maska.jpg");
 
     m_Stadium = std::make_unique<Stadium>();
     m_Stadium->Init(m_EntityManager.get(), m_TextureManager->GetTexture("background"));

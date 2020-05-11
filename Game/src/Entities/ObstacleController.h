@@ -15,9 +15,9 @@ namespace Game
 		void Update(float dt, Engine::EntityManager* entityManager_);
 
 	private:
-		float m_ObstacleWidth = 125.f;
+		float m_ObstacleWidth = 140.f;
 		float m_ObstacleHeight = 550.f;
 		float m_ColiderHeight = 300.f;
-		float m_NumberOfObstacles = 5;
+		float m_NumberOfObstacles = 4;
 	};
 }

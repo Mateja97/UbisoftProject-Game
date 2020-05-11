@@ -27,7 +27,7 @@ namespace Game
 			randomPosition = GetRandomPosition();
 
 			obstacle->AddComponent<ObstacleComponent>(150.f);
-			obstacle->AddComponent<Engine::TransformComponent>(400.f * i, randomPosition , m_ObstacleWidth, m_ObstacleHeight);
+			obstacle->AddComponent<Engine::TransformComponent>(500.f * i, randomPosition , m_ObstacleWidth, m_ObstacleHeight);
 			obstacle->AddComponent<Engine::CollisionComponent>(m_ObstacleWidth, m_ObstacleHeight);
 			obstacle->AddComponent<Engine::MoverComponent>();
 			obstacle->AddComponent<Engine::SpriteComponent>().m_Image = texture_;
@@ -48,7 +48,7 @@ namespace Game
 			obstacle = std::make_unique<Engine::Entity>();
 
 			obstacle->AddComponent<ObstacleComponent>(150.f);
-			obstacle->AddComponent<Engine::TransformComponent>(400.f * i, randomPosition - 720.f, m_ObstacleWidth, m_ObstacleHeight);
+			obstacle->AddComponent<Engine::TransformComponent>(500.f * i, randomPosition - 720.f, m_ObstacleWidth, m_ObstacleHeight);
 			obstacle->AddComponent<Engine::CollisionComponent>(m_ObstacleWidth, m_ObstacleHeight);
 			obstacle->AddComponent<Engine::MoverComponent>();
 			obstacle->AddComponent<Engine::SpriteComponent>().m_Image = texture_;

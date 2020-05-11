@@ -13,7 +13,7 @@ namespace Game
 
         player->AddComponent<Engine::TransformComponent>(-400.f, 0.f, 70.f, 70.f);
         //TODO: kolizija kruga
-        player->AddComponent<Engine::CollisionComponent>(70.f, 70.0f);
+        player->AddComponent<Engine::CollisionComponent>(60.f, 60.f);
         player->AddComponent<Engine::PlayerComponent>(50.f);
         player->AddComponent<Engine::InputComponent>();
         player->AddComponent<Engine::MoverComponent>();
@@ -45,7 +45,7 @@ namespace Game
             if (moveUpInput) {
                 pos->m_Position.y -= speed;
             }
-            move->m_TranslationSpeed.y = speed * (moveUpInput ? -1.0f : 1.0f);
+            move->m_TranslationSpeed.y = speed * (moveUpInput ? -10.0f : 3.0f);
            // std::cout << move->m_TranslationSpeed.y << std::endl;
             auto collider = entity->GetComponent<Engine::CollisionComponent>();
 
