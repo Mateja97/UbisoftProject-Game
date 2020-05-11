@@ -13,8 +13,9 @@ namespace Game
         
     };
 
-    struct ScoreComponent : public Engine::Component
+    struct ScoreColiderComponent : public Engine::Component
     {
-
+        float m_Speed = 150.f;
+        bool m_triggered = false;
     };
 }

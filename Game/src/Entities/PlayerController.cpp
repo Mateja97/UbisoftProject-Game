@@ -4,8 +4,10 @@
 
 namespace Game
 {
+    
     bool PlayerController::m_running = true;
     int PlayerController::score = 0;
+
     bool PlayerController::Init(Engine::EntityManager* entityManager_, Engine::Texture* texture_)
     {
         ASSERT(entityManager_ != nullptr, "Must pass valid pointer to entitymanager to PlayerController::Init()");
@@ -62,8 +64,12 @@ namespace Game
                 {
                     auto mover = entity->GetComponent<Engine::MoverComponent>();
                     m_running = false;
-                    score += 1;
                     mover->m_TranslationSpeed = { 0,0 };
+                }
+                if (coliderEntity->HasComponent<ScoreColiderComponent>() && !coliderEntity->GetComponent<ScoreColiderComponent>()->m_triggered)
+                {
+                    coliderEntity->GetComponent<ScoreColiderComponent>()->m_triggered = true;
+                    score += 1;
                 }
             }
         }

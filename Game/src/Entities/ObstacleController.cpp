@@ -35,16 +35,6 @@ namespace Game
 
 			entityManager_->AddEntity(std::move(obstacle));
 
-			//TODO:Colider koji povecava skor igraca kada prodje kroz prepreku
-			
-			/*auto scoreColider = std::make_unique<Engine::Entity>();
-
-			scoreColider->AddComponent<Engine::TransformComponent>(400.f * i + m_ObstacleWidth / 2, 0.f, 50.f, m_ColiderHeight);
-			scoreColider->AddComponent<Engine::CollisionComponent>(50.f, m_ColiderHeight);
-
-			entityManager_->AddEntity(std::move(scoreColider));
-			*/
-
 			//UPPER PIPE
 			obstacle = std::make_unique<Engine::Entity>();
 
@@ -56,7 +46,20 @@ namespace Game
 
 			entityManager_->AddEntity(std::move(obstacle));
 		}
-		//TODO: mozda da stavim proveru za obstacle kao return tip
+
+		for (int i = 1; i < m_NumberOfObstacles; ++i) {
+			
+			auto scoreColider = std::make_unique<Engine::Entity>();
+
+			scoreColider->AddComponent<ScoreColiderComponent>();
+			scoreColider->AddComponent<Engine::TransformComponent>(500.f * i + m_ObstacleWidth / 2 + 30.f, 0.f, 5.f, 720.f);
+			scoreColider->AddComponent<Engine::CollisionComponent>(5.f, 720.f);
+			scoreColider->AddComponent<Engine::MoverComponent>();
+			//scoreColider->AddComponent<Engine::SpriteComponent>().m_Image = texture_;
+
+			entityManager_->AddEntity(std::move(scoreColider));
+		}
+		
 		return true;
 	}
 
@@ -89,18 +92,40 @@ namespace Game
 				transform->m_Position.x = 800.f;
 				if (obstacle->GetId() % 2 == 1)
 				{
-					LOG_INFO("DONJA PRE {}, ID {}", randomPosition, obstacle->GetId());
 					randomPosition = GetRandomPosition();
-					LOG_INFO("DONJA {}, ID {}", randomPosition, obstacle->GetId());
 				}
 				else
 				{
-					LOG_INFO("GORNJA PRE {}, ID {}", randomPosition, obstacle->GetId());
-					randomPosition = randomPosition - 720;
-					LOG_INFO("GORNJA {}, ID{}", randomPosition, obstacle->GetId());
+					randomPosition = randomPosition - 720;;
 				}
 				transform->m_Position.y = randomPosition;
 			}
 		}
+
+		obstaclesToMove = entityManager_->GetAllEntitiesWithComponent<Game::ScoreColiderComponent>();
+
+		for (auto& colider : obstaclesToMove)
+		{
+			auto move = colider->GetComponent<Engine::MoverComponent>();
+			auto speed = colider->GetComponent<Game::ScoreColiderComponent>()->m_Speed;
+			if (!Game::PlayerController::m_running) {
+
+				move->m_TranslationSpeed.x = 0;
+
+			}
+			else {
+				move->m_TranslationSpeed.x = speed * -1.f;
+			}
+
+			auto transform = colider->GetComponent<Engine::TransformComponent>();
+
+
+			if (transform->m_Position.x < -800.f)
+			{
+				transform->m_Position.x = 800.f;
+				colider->GetComponent<ScoreColiderComponent>()->m_triggered = false;
+			}
+		}
+
 	}
 }
